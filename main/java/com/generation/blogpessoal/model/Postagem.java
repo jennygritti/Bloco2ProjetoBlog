@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity // transforma em tabela
 @Table(name="tb_postagens") //nomeia a tabela
-public class PostagemModel {
+public class Postagem {
 	
 	@Id // informa que é um ID
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //auto incremento
@@ -36,6 +36,10 @@ public class PostagemModel {
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema usuario;
 	
 	public Long getId() {
 		return id;
