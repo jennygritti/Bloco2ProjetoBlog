@@ -2,6 +2,8 @@ package com.generation.blogpessoal.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +34,13 @@ public class TemaController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Tema> getById(@PathVariable Long id){
+	public ResponseEntity<Tema> getById(@Valid @PathVariable Long id){
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Tema>> getByName(@PathVariable String nome){
+	public ResponseEntity<List<Tema>> getByName(@Valid @PathVariable String nome){
 		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
 	}
 	
@@ -54,7 +56,7 @@ public class TemaController {
 	}
 	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable Long id) {
+	public void delete(@Valid @PathVariable Long id) {
 		repository.deleteById(id);
 	}
 }
